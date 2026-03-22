@@ -1,1 +1,1 @@
-# vscode-prvi-projekat
+# kinosala_AhmedKljajic
