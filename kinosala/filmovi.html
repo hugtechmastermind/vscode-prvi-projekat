@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmovi - Kinosala</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        /* Fiksni meni */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffc107;
+        }
+
+        /* Glavni sadržaj */
+        main {
+            margin-top: 70px;
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        /* Sekcije žanrova */
+        section {
+            margin-bottom: 50px;
+        }
+
+        section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        /* Grid rasporedza filmove */
+        .filmovi-grid {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            justify-content: start;
+        }
+
+        /* Film kartice */
+        .film {
+            width: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .film:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .film.dostupan {
+            background-color: white;
+        }
+
+        .film.uskoro {
+            background-color: powderblue;
+        }
+
+        .film.nedostupan {
+            background-color: gray;
+        }
+
+        .film-poster {
+            width: 100%;
+            height: 280px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #999;
+            overflow: hidden;
+        }
+
+        .film-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .film-info {
+            padding: 15px;
+        }
+
+        .film-naziv {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 14px;
+            min-height: 2.8em;
+            display: flex;
+            align-items: center;
+        }
+
+        .film-trajanje {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Responsivni dizajn */
+        /* Za male ekrane - do 800px */
+        @media (max-width: 800px) {
+            .filmovi-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            main {
+                margin-top: 100px;
+            }
+        }
+
+        /* Za male ekrane - do 600px - prikaz 1 element u redu */
+        @media (max-width: 600px) {
+            .filmovi-grid {
+                grid-template-columns: 1fr;
+                align-items: center;
+            }
+
+            .film {
+                width: 100%;
+                max-width: 200px;
+                margin: 0 auto;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 20px;
+            }
+
+            nav {
+                position: static;
+            }
+
+            main {
+                margin-top: 0;
+                padding: 20px 10px;
+            }
+
+            section h2 {
+                font-size: 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+                margin-bottom: 30px;
+            }
+        }
+
+        /* Za ultra male ekrane - ispod 300px */
+        @media (max-width: 300px) {
+            .film {
+                width: 100%;
+                max-width: 150px;
+                margin: 0 auto;
+            }
+
+            .film-poster {
+                height: 220px;
+            }
+
+            main {
+                padding: 15px 5px;
+            }
+
+            section h2 {
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fiksni meni -->
+    <nav>
+        <ul>
+            <li><a href="#filmovi">Filmovi</a></li>
+            <li><a href="#raspored">Raspored</a></li>
+            <li><a href="#sala">Sala</a></li>
+        </ul>
+    </nav>
+
+    <!-- Glavni sadržaj -->
+    <main>
+        <h1 id="filmovi">Filmovi u ponudi</h1>
+
+        <!-- Akcija sekcija -->
+        <section id="akcija">
+            <h2>Akcija</h2>
+            <div class="filmovi-grid">
+                <div class="film dostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Akcija+Film+1" alt="Akcija Film 1">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Brzi i Besni 11</div>
+                        <div class="film-trajanje">148 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film dostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Akcija+Film+2" alt="Akcija Film 2">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Top Gun: Maverick</div>
+                        <div class="film-trajanje">131 minut</div>
+                    </div>
+                </div>
+
+                <div class="film uskoro">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Akcija+Film+3" alt="Akcija Film 3">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Mission Impossible 8</div>
+                        <div class="film-trajanje">156 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film dostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Akcija+Film+4" alt="Akcija Film 4">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">John Wick 5</div>
+                        <div class="film-trajanje">145 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film nedostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Akcija+Film+5" alt="Akcija Film 5">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Die Hard Legacy</div>
+                        <div class="film-trajanje">132 minuta</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Drama sekcija -->
+        <section id="drama">
+            <h2>Drama</h2>
+            <div class="filmovi-grid">
+                <div class="film dostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Drama+Film+1" alt="Drama Film 1">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Oppenheimer</div>
+                        <div class="film-trajanje">180 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film dostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Drama+Film+2" alt="Drama Film 2">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Killers of the Flower Moon</div>
+                        <div class="film-trajanje">206 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film uskoro">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Drama+Film+3" alt="Drama Film 3">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Barbie Film</div>
+                        <div class="film-trajanje">114 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film dostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Drama+Film+4" alt="Drama Film 4">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Past Lives</div>
+                        <div class="film-trajanje">145 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film nedostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Drama+Film+5" alt="Drama Film 5">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">The Crown</div>
+                        <div class="film-trajanje">128 minuta</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Komedija sekcija -->
+        <section id="komedija">
+            <h2>Komedija</h2>
+            <div class="filmovi-grid">
+                <div class="film dostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Komedija+Film+1" alt="Komedija Film 1">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Barbie</div>
+                        <div class="film-trajanje">114 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film dostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Komedija+Film+2" alt="Komedija Film 2">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Hangover 4</div>
+                        <div class="film-trajanje">102 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film uskoro">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Komedija+Film+3" alt="Komedija Film 3">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Ticket to Paradise</div>
+                        <div class="film-trajanje">104 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film dostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Komedija+Film+4" alt="Komedija Film 4">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Knives Out 3</div>
+                        <div class="film-trajanje">139 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film nedostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Komedija+Film+5" alt="Komedija Film 5">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Daddy's Home</div>
+                        <div class="film-trajanje">96 minuta</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animirani sekcija -->
+        <section id="animirani">
+            <h2>Animirani</h2>
+            <div class="filmovi-grid">
+                <div class="film dostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Animirani+Film+1" alt="Animirani Film 1">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Elemental</div>
+                        <div class="film-trajanje">101 minut</div>
+                    </div>
+                </div>
+
+                <div class="film dostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Animirani+Film+2" alt="Animirani Film 2">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Spiderman Across the Verse</div>
+                        <div class="film-trajanje">140 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film uskoro">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Animirani+Film+3" alt="Animirani Film 3">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Wish</div>
+                        <div class="film-trajanje">95 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film dostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Animirani+Film+4" alt="Animirani Film 4">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Frozen 3</div>
+                        <div class="film-trajanje">120 minuta</div>
+                    </div>
+                </div>
+
+                <div class="film nedostupan">
+                    <div class="film-poster">
+                        <img src="https://via.placeholder.com/200x280?text=Animirani+Film+5" alt="Animirani Film 5">
+                    </div>
+                    <div class="film-info">
+                        <div class="film-naziv">Toy Story 5</div>
+                        <div class="film-trajanje">90 minuta</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
