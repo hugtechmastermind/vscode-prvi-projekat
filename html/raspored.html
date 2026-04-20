@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspored - Kino</title>
+    <link rel="stylesheet" href="../css/filmovi.css">
+    <link rel="stylesheet" href="../css/sala.css">
+    <style>
+        .raspored-tabela {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #1a1a1a;
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        .raspored-tabela th, .raspored-tabela td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .raspored-tabela th {
+            background: linear-gradient(180deg, #5c0000 0%, #200000 100%);
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .raspored-tabela tr:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+
+        .naslov-rasporeda {
+            text-align: center;
+            color: #d4af37;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="filmovi.html">Filmovi</a></li>
+            <li><a href="raspored.html">Raspored</a></li>
+            <li><a href="sala.html">Sala</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="zanr-sekcija">
+            <h2 class="naslov-rasporeda">Trenutni Raspored Projekcija</h2>
+            <table class="raspored-tabela">
+                <thead>
+                    <tr>
+                        <th>Vrijeme</th>
+                        <th>Film</th>
+                        <th>Sala</th>
+                        <th>Rezervacija</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>18:00</td>
+                        <td style="font-weight: bold; color: white;">Avatar 2</td>
+                        <td>Sala 3</td>
+                        <td><a href="sala.html" style="color: #ffd700; text-decoration: none;">&rarr; Pređi na rezervaciju</a></td>
+                    </tr>
+                    <tr>
+                        <td>20:30</td>
+                        <td style="font-weight: bold; color: white;">Spider-Man: Across the Spider-Verse</td>
+                        <td>Sala 3</td>
+                        <td><a href="sala.html" style="color: #ffd700; text-decoration: none;">&rarr; Pređi na rezervaciju</a></td>
+                    </tr>
+                    <tr>
+                        <td>22:15</td>
+                        <td style="font-weight: bold; color: white;">Dune: Part Two</td>
+                        <td>Sala 3</td>
+                        <td><a href="sala.html" style="color: #ffd700; text-decoration: none;">&rarr; Pređi na rezervaciju</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</body>
+</html>

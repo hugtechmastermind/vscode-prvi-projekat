@@ -16,139 +16,19 @@
         </ul>
     </nav>
 
-    <main>
-        <div class="info">
-            <h1>Oppenheimer</h1>
-            <p>Vrijeme projekcije: 20:00</p>
-            <p>Sala broj: 3</p>
-        </div>
-
-        <div class="platno-container">
-            <div class="platno">PLATNO</div>
-        </div>
-
-        <div class="sala-grid">
-            <!-- Red A -->
-            <div class="red-oznaka">A</div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-
-            <!-- Red B -->
-            <div class="red-oznaka">B</div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste rezervisano"></div>
-            <div class="sjediste rezervisano"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-
-            <!-- Red C -->
-            <div class="red-oznaka">C</div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste rezervisano"></div>
-            <div class="sjediste rezervisano"></div>
-
-            <!-- Red D -->
-            <div class="red-oznaka">D</div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-
-            <!-- Red E -->
-            <div class="red-oznaka">E</div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste rezervisano"></div>
-            <div class="sjediste rezervisano"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-
-            <!-- Red F -->
-            <div class="red-oznaka">F</div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste rezervisano"></div>
-            <div class="sjediste rezervisano"></div>
-
-            <!-- Red G -->
-            <div class="red-oznaka">G</div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste zauzeto"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-
-            <!-- Red H -->
-            <div class="red-oznaka">H</div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-            <div class="sjediste slobodno"></div>
-        </div>
-
-        <div class="legenda">
-            <div class="legenda-item">
-                <div class="legenda-boja slobodno"></div>
-                <span>Slobodno</span>
-            </div>
-            <div class="legenda-item">
-                <div class="legenda-boja zauzeto"></div>
-                <span>Zauzeto</span>
-            </div>
-            <div class="legenda-item">
-                <div class="legenda-boja rezervisano"></div>
-                <span>Rezervisano</span>
-            </div>
-        </div>
-
+    <!-- Kontejner za Javascript dinamičku salu -->
+    <main id="sala">
+        <!-- Ovdje JS injektira sadržaj -->
     </main>
 
+    <!-- Navigacija dugmadi -->
+    <div style="text-align: center; margin: 20px 0;">
+        <button id="btn-prethodna" style="padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px;">Prethodna projekcija</button>
+        <button id="btn-sljedeca" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Sljedeća projekcija</button>
+    </div>
+
+    <!-- Skripte -->
+    <script src="../scripts/kinoSala.js"></script>
+    <script src="../scripts/app.js"></script>
 </body>
 </html>

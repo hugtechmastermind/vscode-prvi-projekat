@@ -1,4 +1,4 @@
-/* filmovi.css */
+/* filmovi.css - Kino Tema (Crna, Zlatna, Crvena) */
 * {
     margin: 0;
     padding: 0;
@@ -6,18 +6,21 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-width: 300px;
-    background-color: #f0f0f0;
+    background-color: #0b0b0b; /* Crna pozadina */
+    color: #e0e0e0; /* Bijeli tekst */
 }
 
-/* Meni styling */
+/* Navigacija (Crveno/Mračno zlato) */
 nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #333;
+    background: linear-gradient(180deg, #5c0000 0%, #200000 100%);
+    border-bottom: 2px solid #d4af37; /* Zlatna lajsna */
     z-index: 1000;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
 }
 
 nav ul {
@@ -28,84 +31,121 @@ nav ul {
 }
 
 nav li {
-    margin: 0 15px;
+    margin: 0 20px;
 }
 
 nav a {
-    color: white;
+    color: #ffd700; /* Zlatni linkovi */
     text-decoration: none;
     font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
 }
 
 nav a:hover {
-    color: #ffd700;
+    color: #fff;
+    text-shadow: 0 0 10px #ff0000;
 }
 
 /* Sadržaj */
 main {
-    margin-top: 60px; /* space for fixed header */
+    margin-top: 80px; 
     padding: 20px;
 }
 
 .zanr-sekcija {
-    margin-bottom: 40px;
-    border: 1px solid #ccc;
-    padding: 20px;
-    background-color: #e8e8e8;
-    border-radius: 8px;
+    margin-bottom: 50px;
+    border: 1px solid #333;
+    padding: 30px;
+    background-color: #151515;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+    position: relative;
+    border-top: 3px solid #b00b0b;
 }
 
 .zanr-sekcija h2 {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     text-align: center;
+    color: #d4af37;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
 }
 
+/* Grid Mreža za filmove */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
     justify-content: center;
 }
 
-/* Pojedinačna krartica filma */
+/* Pojedinačna kartica filma */
 .film {
     width: 200px;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #333;
 }
 
-/* Boje pozadine kartice */
-.trenutno {
-    background-color: white;
+.film:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+    border-color: #d4af37;
 }
 
-.uskoro {
-    background-color: powderblue;
-}
-
-.nedostupno {
-    background-color: gray;
-}
-
+/* Slike (Posteri) - sada popunjava karticu i izgleda profesionalnije */
 .film img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-bottom: 2px solid #5c0000;
+}
+
+.film-info {
+    padding: 15px 10px;
+    width: 100%;
 }
 
 .film .naziv {
     font-weight: bold;
-    margin-bottom: 5px;
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: #fff;
+    min-height: 2.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .film .trajanje {
-    font-size: 0.9em;
-    color: #333;
+    font-size: 0.85em;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+/* Statusindikatori - prebačeno u bedževe/okvire za kino mračni prikaz ali uz poštu spirali */
+.trenutno {
+    border-bottom: 4px solid white !important;
+}
+
+.uskoro {
+    border-bottom: 4px solid powderblue !important;
+}
+
+.nedostupno {
+    border-bottom: 4px solid gray !important;
+    opacity: 0.6;
 }
 
 /* Responzivnost */
@@ -118,33 +158,24 @@ main {
         align-items: center;
     }
     nav li {
-        margin: 5px 0;
+        margin: 10px 0;
     }
     main {
         margin-top: 0;
     }
 }
 
-/* Specijalne breaktpoints po zadatku */
+/* Specijalne breaktpoints */
 @media screen and (min-width: 800px) and (max-width: 1079px) {
     .grid-container {
-        /* Force max 3 items locally if grid max width is constrained */
-        max-width: 620px;
+        max-width: 650px;
         margin: 0 auto;
     }
 }
 
 @media screen and (min-width: 1080px) {
     .grid-container {
-        max-width: 1040px;
+        max-width: 1100px;
         margin: 0 auto;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .grid-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
     }
 }
